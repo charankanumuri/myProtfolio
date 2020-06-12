@@ -6,3 +6,7 @@ This is my portfolio which uses AWS and ReactJs.
 
 GIT, GITHUB
 SSH
+HTML
+CSS
+Font Awesome
+Google Apis
