@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Babel Demo</title>
+    <style media="screen">
+      .errorBox {
+        border: 1px solid red;
+        background-color: #eebbbb;
+        margin: 1em;
+        padding: 2em;
+      }
+
+
+      .errorBox--hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+        <label>Name: <input type="text" id="name"/></label>
+        <button type="submit" id="submit-btn">Click Me!</button>
+        <div id="content"></div>
+        <div id="error" class="errorBox--hidden">
+          Error message will be here
+      </div>
+    </main>
+
+
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js">
+    </script>
+
+    <script type="text/babel" data-presets="latest">
+        const getMessage = (name) => `Welcome to JS, ${name}`;
+        const button = document.getElementById('submit-btn');
+        const messageArea = document.getElementById('error');
+        const contentArea = document.getElementById('content');
+        button.addEventListener('click', (event)=>{
+            messageArea.className = "errorBox--hidden";
+            contentArea.textContent="";
+            let nameTemp = document.getElementById('name').value;
+            if(nameTemp.length < 2){
+              messageArea.textContent = "Name is invalid";
+              messageArea.className = "errorBox";
+            }else{
+              contentArea.textContent = getMessage(nameTemp);
+            }
+        });
+
+
+      </script>
+
+  </body>
+</html>
