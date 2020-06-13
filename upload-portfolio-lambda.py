@@ -10,12 +10,25 @@ def lambda_handler(event, context):
 
     topic = sns.Topic('arn:aws:sns:ap-south-1:705123275076:DeployPortfolioTopic')
 
+    location = {
+        "bucketName": 'portfoliobuild.4myiot.net',
+        "objectKey": 'portfoliobuild.zip'
+    }
     try:
+        job = event.get("CodePipeline.job")
+
+        if job:
+            for artifact in job["data"]["inputArtifacts"]:
+                if artifact["name"] == "MyAppBuild":
+                    location = artifact["location"]["s3Location"]
+
+        print("Building Portfolio from "+ str(location))
+
         portfolio_bucket = s3.Bucket('portfolio.4myiot.net')
-        build_bucket = s3.Bucket('portfoliobuild.4myiot.net')
+        build_bucket = s3.Bucket(location["bucketName"])
 
         portfolio_zip = io.BytesIO()
-        build_bucket.download_fileobj('portfoliobuild.zip', portfolio_zip)
+        build_bucket.download_fileobj(location["objectKey"], portfolio_zip)
 
         with zipfile.ZipFile(portfolio_zip) as myzip:
             for nm in myzip.namelist():
@@ -24,6 +37,9 @@ def lambda_handler(event, context):
                 portfolio_bucket.Object(nm).Acl().put(ACL='public-read')
         print("Job Done!!!")
         topic.publish(Subject="Portfolio Deployed!!!", Message="Your Portfolio deployed successfully.")
+        if job:
+            client = boto3.client('codepipeline')
+            client.put_job_success_result(jobId=job["id"])
     except:
         topic.publish(Subject="Portfolio Deployment Failed...", Message="Your Portfolio deployment was not successful.")
         raise
