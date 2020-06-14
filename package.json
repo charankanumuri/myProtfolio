@@ -1,0 +1,33 @@
+{
+  "name": "myProtfolio",
+  "version": "1.0.0",
+  "description": "This is my portfolio which uses AWS and ReactJs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "webpack-watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charankanumuri/myProtfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charankanumuri/myProtfolio/issues"
+  },
+  "homepage": "https://github.com/charankanumuri/myProtfolio#readme",
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
+  }
+}
