@@ -1,5 +1,33 @@
-import 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+import ExampleWork from "./example-work.js";
 
-console.log("Loaded React-DOM");
-
-console.log("test webpack watch");
+const myWork = [
+  {
+  'title': "Work Example",
+    'image': {
+      'desc': "example screenshot of a project involving code",
+      'src': "images/example1.png",
+      'comment': "No Comments"
+    }
+  },
+  {
+    'title': "ReactJs Application",
+    'image': {
+      'desc': "ReactJs Application for tracking Covid-19",
+      'src': "images/example1.png",
+      'comment': `“Chemistry” by Surian Soosay is licensed under CC BY 2.0
+          https://www.flickr.com/photos/ssoosay/4097410999`
+    }
+  },
+  {
+    'title': "Work Example",
+    'image': {
+      'desc': "example screenshot of a project involving cats",
+      'src': "images/example3.png",
+      'comment': `“Bengal cat” by roberto shabs is licensed under CC BY 2.0
+           https://www.flickr.com/photos/37287295@N00/2540855181`
+    }
+  }
+];
+ReactDOM.render(<ExampleWork  work={myWork}/>, document.getElementById('example-work'));
